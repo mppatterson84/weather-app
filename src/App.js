@@ -24,38 +24,36 @@ class App extends Component {
       data.key = this.state.weatherdata.length;
     }
 
+    // Convert unix time to readable time
+    const timeConvert = timeInput => {
+      timeInput = new Date(timeInput * 1000);
+      timeInput = timeInput.toString();
+
+      var strArr = timeInput.split(' ');
+      var timeStr = strArr[4];
+      var timeArr = timeStr.split(':');
+      var amOrPm = '';
+
+      timeArr[0] = parseInt(timeArr[0]);
+      if (timeArr[0] < 12) {
+        amOrPm = 'am';
+      } else {
+        timeArr[0] -= 12;
+        amOrPm = 'pm';
+      }
+
+      timeArr[0] = String(timeArr[0]);
+
+      var newTime = `${timeArr[0]}:${timeArr[1]}:${timeArr[2]} ${amOrPm}`;
+
+      return newTime;
+    };
+
     // Sunrise
-    var sunrise = data.sys.sunrise;
-    sunrise = new Date(sunrise * 1000);
-    sunrise = sunrise.toString();
-
-    var sunriseH = sunrise.slice(16, 18);
-    var sunriseM = sunrise.slice(19, 21);
-    var sunriseS = sunrise.slice(22, 24);
-    sunriseH = parseInt(sunriseH);
-    sunriseM = parseInt(sunriseM);
-    sunriseS = parseInt(sunriseS);
-
-    sunrise = `${sunriseH}:${sunriseM}:${sunriseS} am`;
-    data.sys.sunrise = sunrise;
+    data.sys.sunrise = timeConvert(data.sys.sunrise);
 
     // Sunset
-    var sunset = data.sys.sunset;
-    sunset = new Date(sunset * 1000);
-    sunset = sunset.toString();
-
-    var sunsetH = sunset.slice(16, 18);
-    var sunsetM = sunset.slice(19, 21);
-    var sunsetS = sunset.slice(22, 24);
-    sunsetH = parseInt(sunsetH);
-    if (sunsetH >= 12) {
-      sunsetH -= 12;
-    }
-    sunsetM = parseInt(sunsetM);
-    sunsetS = parseInt(sunsetS);
-
-    sunset = `${sunsetH}:${sunsetM}:${sunsetS} pm`;
-    data.sys.sunset = sunset;
+    data.sys.sunset = timeConvert(data.sys.sunset);
 
     this.setState({ weatherdata: this.state.weatherdata.concat(data) });
 
