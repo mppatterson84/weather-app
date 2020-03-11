@@ -7,7 +7,7 @@ export class GetZipcode extends Component {
   };
 
   static propTypes = {
-    getWeatherData: PropTypes.func.isRequired
+    getWeatherDataProp: PropTypes.func.isRequired
   };
 
   handleSubmit = e => {
@@ -15,7 +15,7 @@ export class GetZipcode extends Component {
     if (this.state.location === '') {
       alert('Please enter a valid five digit zipcode.');
     } else {
-      this.props.getWeatherData(this.state.location);
+      this.props.getWeatherDataProp(this.state.location);
       this.setState({ location: '' });
     }
   };
