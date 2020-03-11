@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import { GetZipcode } from './components/locations/GetZipcode';
+import { GetWindDirection } from './components/weatherData/WindDirection';
 
 class App extends Component {
   state = {
@@ -75,9 +76,19 @@ class App extends Component {
               <p>Humidity: {zipcode.main.humidity}%</p>
               <p>Sky: {zipcode.weather[0].main}</p>
               <p>Description: {zipcode.weather[0].description}</p>
-              <p>Wind Speed: {zipcode.wind.speed}</p>
-              <p>Wind Deg: {zipcode.wind.deg}</p>
-              <p>Wind Gusts: {zipcode.wind.gust}</p>
+              <p>
+                Wind Speed:{' '}
+                {zipcode.wind.speed === undefined
+                  ? 0
+                  : `${zipcode.wind.speed} mph`}
+              </p>
+              <GetWindDirection getWindDirection={zipcode.wind.deg} />
+              <p>
+                Wind Gusts:{' '}
+                {zipcode.wind.gust === undefined
+                  ? 0
+                  : `${zipcode.wind.gust} mph`}
+              </p>
               <p>Sunrise: {zipcode.sys.sunrise}</p>
               <p>Sunset: {zipcode.sys.sunset}</p>
             </div>
