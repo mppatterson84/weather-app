@@ -25,20 +25,25 @@ export class GetZipcode extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <div className="form-group">
-          <label>
-            Zipcode
-            <input
-              type="number"
-              name="location"
-              placeholder="12345"
-              value={this.state.location}
-              onChange={this.handleChange}
-              className="form-control"
-            />
-          </label>
+        <div className="row">
+          <div className="col-md-6">
+            <p className="mb-3 mt-3">Get the current weather by ZIP Code.</p>
+          </div>
+          <div className="col-md-6">
+            <div className="input-group my-2">
+              <input
+                id="location"
+                type="number"
+                name="location"
+                placeholder="ZIP Code"
+                value={this.state.location}
+                onChange={this.handleChange}
+                className="form-control"
+              />
+              <input className="btn btn-info" type="submit" value="Submit" />
+            </div>
+          </div>
         </div>
-        <input className="btn btn-info" type="submit" value="Submit" />
       </form>
     );
   }
