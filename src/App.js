@@ -7,8 +7,12 @@ class App extends Component {
     return (
       <div className="App">
         <div className="container">
-          <h1>Weather</h1>
-          <WeatherDetails />
+          <div className="row">
+            <div className="col-md-8 mx-auto">
+              <h1 className="my-3">Current Weather</h1>
+              <WeatherDetails />
+            </div>
+          </div>
         </div>
       </div>
     );
