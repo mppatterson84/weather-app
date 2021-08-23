@@ -99,6 +99,7 @@ export class WeatherDetails extends Component {
 
             <div className="row border-top border-3 mx-3 pt-3 text-center">
               <div className="col-sm-6">
+                <p>Cloud Cover: {zipcode.clouds.all}%</p>
                 <p>
                   Wind: <GetWindDirection getWindDirection={zipcode.wind.deg} />{' '}
                   {zipcode.wind.speed === undefined
@@ -113,7 +114,6 @@ export class WeatherDetails extends Component {
                 </p>
               </div>
               <div className="col-sm-6">
-                <p>Pressure: {zipcode.main.pressure}</p>
                 <p>Sunrise: {zipcode.sys.sunrise}</p>
                 <p>Sunset: {zipcode.sys.sunset}</p>
               </div>
