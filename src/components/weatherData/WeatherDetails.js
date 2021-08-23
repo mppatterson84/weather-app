@@ -100,12 +100,11 @@ export class WeatherDetails extends Component {
             <div className="row border-top border-3 mx-3 pt-3 text-center">
               <div className="col-sm-6">
                 <p>
-                  Wind Speed:{' '}
+                  Wind: <GetWindDirection getWindDirection={zipcode.wind.deg} />{' '}
                   {zipcode.wind.speed === undefined
                     ? 0
                     : `${zipcode.wind.speed} mph`}
                 </p>
-                <GetWindDirection getWindDirection={zipcode.wind.deg} />
                 <p>
                   Wind Gusts:{' '}
                   {zipcode.wind.gust === undefined

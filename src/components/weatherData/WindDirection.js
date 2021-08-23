@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class GetWindDirection extends Component {
@@ -56,6 +56,6 @@ export class GetWindDirection extends Component {
   }
 
   render() {
-    return <p>Wind Direction: {this.state.direction}</p>;
+    return this.state.direction;
   }
 }
