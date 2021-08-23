@@ -9,6 +9,8 @@ export class WeatherDetails extends Component {
     weatherdata: []
   };
 
+  capitalize = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+
   getWeatherData = async location => {
     this.setState({ location: null, weatherdata: [] });
 
@@ -74,10 +76,7 @@ export class WeatherDetails extends Component {
               <div>
                 <h4>{zipcode.name}</h4>
                 <div className="d-flex">
-                  <p>
-                    {zipcode.weather[0].description.charAt(0).toUpperCase() +
-                      zipcode.weather[0].description.slice(1)}
-                  </p>
+                  <p>{this.capitalize(zipcode.weather[0].description)}</p>
                   <img
                     src={`http://openweathermap.org/img/wn/${zipcode.weather[0].icon}@4x.png`}
                     alt={zipcode.weather[0].description}
@@ -111,7 +110,6 @@ export class WeatherDetails extends Component {
               </div>
               <div className="col-6">
                 <p className="mx-4">Pressure: {zipcode.main.pressure}</p>
-
                 <p className="mx-4">Sunrise: {zipcode.sys.sunrise}</p>
                 <p className="mx-4">Sunset: {zipcode.sys.sunset}</p>
               </div>
