@@ -77,46 +77,46 @@ export class WeatherDetails extends Component {
         <GetZipcode getWeatherDataProp={this.getWeatherData} />
         {this.state.weatherdata.map(zipcode => (
           <div className="card p-4 my-3" key={zipcode.key}>
-            <div className="d-flex justify-content-between mx-3">
-              <div>
-                <h4>{zipcode.name}</h4>
-                <div className="d-flex">
-                  <p>{this.capitalize(zipcode.weather[0].description)}</p>
-                  <img
-                    src={`http://openweathermap.org/img/wn/${zipcode.weather[0].icon}@4x.png`}
-                    alt={zipcode.weather[0].description}
-                  />
+            <div>
+              <h4>{zipcode.name}</h4>
+              <p>{this.capitalize(zipcode.weather[0].description)}</p>
+            </div>
+            <div className="text-end">
+              <div className="d-flex justify-content-center">
+                <img
+                  src={`http://openweathermap.org/img/wn/${zipcode.weather[0].icon}@4x.png`}
+                  alt={zipcode.weather[0].description}
+                />
+                <div className="pe-5">
+                  <h2 className="display-1">
+                    {Math.round(zipcode.main.temp)}&deg;F
+                  </h2>
+                  <p>Feels Like: {Math.round(zipcode.main.feels_like)}&deg;F</p>
+                  <p>Humidity: {zipcode.main.humidity}%</p>
                 </div>
-              </div>
-              <div className="p-3">
-                <h2 className="display-1">
-                  {Math.round(zipcode.main.temp)}&deg;F
-                </h2>
-                <p>Feels Like: {Math.round(zipcode.main.feels_like)}&deg;F</p>
-                <p>Humidity: {zipcode.main.humidity}%</p>
               </div>
             </div>
 
-            <div className="row">
-              <div className="col-6">
-                <p className="mx-4">
+            <div className="row border-top border-3 mx-3 pt-3 text-center">
+              <div className="col-sm-6">
+                <p>
                   Wind Speed:{' '}
                   {zipcode.wind.speed === undefined
                     ? 0
                     : `${zipcode.wind.speed} mph`}
                 </p>
                 <GetWindDirection getWindDirection={zipcode.wind.deg} />
-                <p className="mx-4">
+                <p>
                   Wind Gusts:{' '}
                   {zipcode.wind.gust === undefined
                     ? 0
                     : `${zipcode.wind.gust} mph`}
                 </p>
               </div>
-              <div className="col-6">
-                <p className="mx-4">Pressure: {zipcode.main.pressure}</p>
-                <p className="mx-4">Sunrise: {zipcode.sys.sunrise}</p>
-                <p className="mx-4">Sunset: {zipcode.sys.sunset}</p>
+              <div className="col-sm-6">
+                <p>Pressure: {zipcode.main.pressure}</p>
+                <p>Sunrise: {zipcode.sys.sunrise}</p>
+                <p>Sunset: {zipcode.sys.sunset}</p>
               </div>
             </div>
           </div>

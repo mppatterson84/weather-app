@@ -56,6 +56,6 @@ export class GetWindDirection extends Component {
   }
 
   render() {
-    return <p className="mx-4">Wind Direction: {this.state.direction}</p>;
+    return <p>Wind Direction: {this.state.direction}</p>;
   }
 }
