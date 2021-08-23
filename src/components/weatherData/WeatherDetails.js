@@ -20,7 +20,7 @@ export class WeatherDetails extends Component {
     this.setState({ location: null, weatherdata: [] });
 
     const res = await axios.get(
-      `http://api.openweathermap.org/data/2.5/weather?zip=${location},us&units=imperial&mode=json&appid=${process.env.REACT_APP_WEATHER_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?zip=${location},us&units=imperial&mode=json&appid=${process.env.REACT_APP_WEATHER_KEY}`
     );
 
     // Create object key
