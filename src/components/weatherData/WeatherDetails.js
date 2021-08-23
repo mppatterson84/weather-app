@@ -65,27 +65,53 @@ export class WeatherDetails extends Component {
       <div>
         <GetZipcode getWeatherDataProp={this.getWeatherData} />
         {this.state.weatherdata.map(zipcode => (
-          <div key={zipcode.key}>
-            <p>{zipcode.name}</p>
-            <p>Temp: {Math.round(zipcode.main.temp)}&deg;F</p>
-            <p>Feels Like: {Math.round(zipcode.main.feels_like)}&deg;F</p>
-            <p>Pressure: {zipcode.main.pressure}</p>
-            <p>Humidity: {zipcode.main.humidity}%</p>
-            <p>Sky: {zipcode.weather[0].main}</p>
-            <p>Description: {zipcode.weather[0].description}</p>
-            <p>
-              Wind Speed:{' '}
-              {zipcode.wind.speed === undefined
-                ? 0
-                : `${zipcode.wind.speed} mph`}
-            </p>
-            <GetWindDirection getWindDirection={zipcode.wind.deg} />
-            <p>
-              Wind Gusts:{' '}
-              {zipcode.wind.gust === undefined ? 0 : `${zipcode.wind.gust} mph`}
-            </p>
-            <p>Sunrise: {zipcode.sys.sunrise}</p>
-            <p>Sunset: {zipcode.sys.sunset}</p>
+          <div className="card p-4 my-3" key={zipcode.key}>
+            <div className="d-flex justify-content-between mx-3">
+              <div>
+                <h4>{zipcode.name}</h4>
+                <div className="d-flex">
+                  <p>
+                    {zipcode.weather[0].description.charAt(0).toUpperCase() +
+                      zipcode.weather[0].description.slice(1)}
+                  </p>
+                  <img
+                    src={`http://openweathermap.org/img/wn/${zipcode.weather[0].icon}@4x.png`}
+                    alt={zipcode.weather[0].description}
+                  />
+                </div>
+              </div>
+              <div className="p-3">
+                <h2 className="display-1">
+                  {Math.round(zipcode.main.temp)}&deg;F
+                </h2>
+                <p>Feels Like: {Math.round(zipcode.main.feels_like)}&deg;F</p>
+                <p>Humidity: {zipcode.main.humidity}%</p>
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col-6">
+                <p className="mx-4">
+                  Wind Speed:{' '}
+                  {zipcode.wind.speed === undefined
+                    ? 0
+                    : `${zipcode.wind.speed} mph`}
+                </p>
+                <GetWindDirection getWindDirection={zipcode.wind.deg} />
+                <p className="mx-4">
+                  Wind Gusts:{' '}
+                  {zipcode.wind.gust === undefined
+                    ? 0
+                    : `${zipcode.wind.gust} mph`}
+                </p>
+              </div>
+              <div className="col-6">
+                <p className="mx-4">Pressure: {zipcode.main.pressure}</p>
+
+                <p className="mx-4">Sunrise: {zipcode.sys.sunrise}</p>
+                <p className="mx-4">Sunset: {zipcode.sys.sunset}</p>
+              </div>
+            </div>
           </div>
         ))}
       </div>
