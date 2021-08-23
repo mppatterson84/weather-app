@@ -60,6 +60,10 @@ export class WeatherDetails extends Component {
     console.log(this.state.weatherdata[this.state.weatherdata.length - 1]);
   };
 
+  componentDidMount() {
+    this.getWeatherData(60601);
+  }
+
   render() {
     return (
       <div>
