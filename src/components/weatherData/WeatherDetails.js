@@ -9,7 +9,12 @@ export class WeatherDetails extends Component {
     weatherdata: []
   };
 
-  capitalize = s => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+  capitalize = s =>
+    s
+      .toLowerCase()
+      .split(' ')
+      .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+      .join(' ');
 
   getWeatherData = async location => {
     this.setState({ location: null, weatherdata: [] });
