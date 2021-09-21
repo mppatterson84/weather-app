@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Cookies from 'js-cookie';
 
 export class GetZipcode extends Component {
   state = {
@@ -16,6 +17,7 @@ export class GetZipcode extends Component {
       alert('Please enter a valid five digit zipcode.');
     } else {
       this.props.getWeatherDataProp(this.state.location);
+      Cookies.set('zipcode', this.state.location, { expires: 365 });
       this.setState({ location: '' });
     }
   };
