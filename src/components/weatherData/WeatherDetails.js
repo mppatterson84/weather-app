@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { GetWindDirection } from './WindDirection';
 import { GetZipcode } from '../locations/GetZipcode';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export class WeatherDetails extends Component {
   state = {
@@ -68,7 +69,11 @@ export class WeatherDetails extends Component {
   };
 
   componentDidMount() {
-    this.getWeatherData(60601);
+    if (Cookies.get('zipcode')) {
+      this.getWeatherData(Cookies.get('zipcode'));
+    } else {
+      this.getWeatherData(60601);
+    }
   }
 
   render() {
