@@ -13,8 +13,9 @@ export class GetZipcode extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.location === '') {
-      alert('Please enter a valid five digit zipcode.');
+    if (this.state.location.toString().length !== 5) {
+      alert('Please enter a valid five digit ZIP code.');
+      this.setState({ location: '' });
     } else {
       this.props.getWeatherDataProp(this.state.location);
       Cookies.set('zipcode', this.state.location, { expires: 365 });
