@@ -97,7 +97,7 @@ export class WeatherDetails extends Component {
             <div className="text-end">
               <div className="d-flex justify-content-center">
                 <img
-                  src={`http://openweathermap.org/img/wn/${zipcode.weather[0].icon}@4x.png`}
+                  src={`https://openweathermap.org/img/wn/${zipcode.weather[0].icon}@4x.png`}
                   alt={zipcode.weather[0].description}
                 />
                 <div className="pe-5">
