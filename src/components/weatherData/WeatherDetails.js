@@ -20,52 +20,60 @@ export class WeatherDetails extends Component {
   getWeatherData = async location => {
     this.setState({ location: null, weatherdata: [] });
 
-    const res = await axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?zip=${location},us&units=imperial&mode=json&appid=${process.env.REACT_APP_WEATHER_KEY}`
-    );
+    try {
+      const res = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?zip=${location},us&units=imperial&mode=json&appid=${process.env.REACT_APP_WEATHER_KEY}`
+      );
 
-    // Create object key
-    const data = res.data;
-    if (this.state.weatherdata.length === 0) {
-      data.key = 0;
-    } else {
-      data.key = this.state.weatherdata.length;
-    }
-
-    // Convert unix time to readable time
-    const timeConvert = timeInput => {
-      timeInput = new Date(timeInput * 1000);
-      timeInput = timeInput.toString();
-
-      var strArr = timeInput.split(' ');
-      var timeStr = strArr[4];
-      var timeArr = timeStr.split(':');
-      var amOrPm = '';
-
-      timeArr[0] = parseInt(timeArr[0]);
-      if (timeArr[0] < 12) {
-        amOrPm = 'am';
+      // Create object key
+      const data = res.data;
+      if (this.state.weatherdata.length === 0) {
+        data.key = 0;
       } else {
-        timeArr[0] -= 12;
-        amOrPm = 'pm';
+        data.key = this.state.weatherdata.length;
       }
 
-      timeArr[0] = String(timeArr[0]);
+      // Convert unix time to readable time
+      const timeConvert = timeInput => {
+        timeInput = new Date(timeInput * 1000);
+        timeInput = timeInput.toString();
 
-      var newTime = `${timeArr[0]}:${timeArr[1]}:${timeArr[2]} ${amOrPm}`;
+        var strArr = timeInput.split(' ');
+        var timeStr = strArr[4];
+        var timeArr = timeStr.split(':');
+        var amOrPm = '';
 
-      return newTime;
-    };
+        timeArr[0] = parseInt(timeArr[0]);
+        if (timeArr[0] < 12) {
+          amOrPm = 'am';
+        } else {
+          timeArr[0] -= 12;
+          amOrPm = 'pm';
+        }
 
-    // Sunrise
-    data.sys.sunrise = timeConvert(data.sys.sunrise);
+        timeArr[0] = String(timeArr[0]);
 
-    // Sunset
-    data.sys.sunset = timeConvert(data.sys.sunset);
+        var newTime = `${timeArr[0]}:${timeArr[1]}:${timeArr[2]} ${amOrPm}`;
 
-    this.setState({ weatherdata: this.state.weatherdata.concat(data) });
+        return newTime;
+      };
 
-    console.log(this.state.weatherdata[this.state.weatherdata.length - 1]);
+      // Sunrise
+      data.sys.sunrise = timeConvert(data.sys.sunrise);
+
+      // Sunset
+      data.sys.sunset = timeConvert(data.sys.sunset);
+
+      this.setState({ weatherdata: this.state.weatherdata.concat(data) });
+
+      console.clear();
+      console.log(this.state.weatherdata[this.state.weatherdata.length - 1]);
+    } catch (error) {
+      console.clear();
+      alert('Please enter a valid five digit ZIP code.');
+      Cookies.remove('zipcode');
+      this.getWeatherData(60601);
+    }
   };
 
   componentDidMount() {
